@@ -125,3 +125,13 @@ dmypy.json
 .pyre/
 
 .gitignore
+.idea/NeuralNetwork.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+net_tst/MNIST_data/
+net_tst/save/2.data-00000-of-00001
+net_tst/save/2.index
+net_tst/save/2.meta
+neural_network/MNIST/
+vae_net/results/

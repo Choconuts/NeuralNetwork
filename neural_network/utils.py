@@ -12,17 +12,19 @@ def interactive_init():
     tf.global_variables_initializer().run()                                                                #使用全局参数初始化器　并调用run方法　来进行参数初始化
 
 
-def save_variables(path, var_list, sess=None):
+def save_variables(path, var_list, sess=None, global_step=None, write_graph=False):
     if sess is None:
         sess = tf.get_default_session()
 
     sv = tf.train.Saver(var_list)
-    sv.save(sess, path)
+    sv.save(sess, path, global_step=global_step, write_meta_graph=write_graph)
 
 
-def load_variables(path, var_list, sess=None):
+def load_variables(path, var_list, sess=None, global_step=None):
     if sess is None:
         sess = tf.get_default_session()
+    if global_step is not None:
+        path += '-%d' % global_step
 
     sv = tf.train.Saver(var_list)
     sv.restore(sess, path)
@@ -47,8 +49,10 @@ class VarCollector:
     def __exit__(self, exc_type, exc_val, exc_tb):
         vs = self.collect()
 
-        if self.var_list is not None:
+        if type(self.var_list) == list:
             self.var_list.extend(vs - self.vs)
+        if type(self.var_list) == set:
+            self.var_list += vs - self.vs
 
 
 class AutoDecAdam:
@@ -68,5 +72,8 @@ class AutoDecAdam:
             else:
                 rate = self.initial_learning_rate
         return tf.train.AdamOptimizer(rate).minimize(loss, global_step=global_step, var_list=var_list)
+
+    def minimize(self, loss, var_list=None):
+        return self.__call__(loss, var_list)
 
 

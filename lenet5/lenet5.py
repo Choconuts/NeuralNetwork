@@ -72,7 +72,7 @@ if __name__ == '__main__':
     with VarCollector(var_list):
         y_conv = LeNet5(x, keep_prob)
 
-    # Extended graph for train
+    # Extend
     cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y_conv), reduction_indices=[1]))  # 交叉熵
 
     train_step = AutoDecAdam(1e-4)(cross_entropy, var_list)
