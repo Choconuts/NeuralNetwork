@@ -1,2 +1,2 @@
-model_checkpoint_path: "/Users/choconut/PycharmProjects/DeepLearning/net_tst/save/1"
-all_model_checkpoint_paths: "/Users/choconut/PycharmProjects/DeepLearning/net_tst/save/1"
+model_checkpoint_path: "D:\\Work\\NeuralNet\\NeuralNetwork\\net_tst\\save\\1"
+all_model_checkpoint_paths: "D:\\Work\\NeuralNet\\NeuralNetwork\\net_tst\\save\\1"
